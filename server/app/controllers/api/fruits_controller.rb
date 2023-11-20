@@ -1,40 +1,44 @@
-class Api::FruitsController < ApplicationController
-  before_action :set_fruit, only: [:show, :update, :destroy]
+# frozen_string_literal: true
 
-  def index
-    fruits = Fruit.all
-    render json: fruits
-  end
+module Api
+  class FruitsController < ApplicationController
+    before_action :set_fruit, only: %i[show update destroy]
 
-  def show
-    render json: @fruit
-  end
-
-  def create
-    fruit = Fruit.new(fruit_params)
-    if fruit.save
-      render json: fruit
-    else
-      render json: fruit.errors, status: :unprocessable_entity
+    def index
+      fruits = Fruit.all
+      render json: fruits
     end
-  end
 
-  def update
-    if @fruit.update(fruit_params)
-      render json: fruit
-    else
-      render json: fruit.errors, status: unprocessable_entity
+    def show
+      render json: @fruit
     end
-  end
 
-  def destroy
-    @fruit.destroy
-    render json: fruit
-  end
+    def create
+      fruit = Fruit.new(fruit_params)
+      if fruit.save
+        render json: fruit
+      else
+        render json: fruit.errors, status: :unprocessable_entity
+      end
+    end
 
-  private
+    def update
+      if @fruit.update(fruit_params)
+        render json: fruit
+      else
+        render json: fruit.errors, status: unprocessable_entity
+      end
+    end
 
-  def set_fruit
-    @fruit = Fruit.find(params[:id])
+    def destroy
+      @fruit.destroy
+      render json: fruit
+    end
+
+    private
+
+    def set_fruit
+      @fruit = Fruit.find(params[:id])
+    end
   end
 end

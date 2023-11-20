@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 CSV.read(Rails.root.join('db', 'data', 'fruits.csv'), headers: true).each do |row|
@@ -5,7 +7,7 @@ CSV.read(Rails.root.join('db', 'data', 'fruits.csv'), headers: true).each do |ro
   name = row['name'].to_s
   position = row['position'].to_i
   comment = row['comment'].to_s
-  Fruit.find_or_create_by(id: id) do |fruit|
+  Fruit.find_or_create_by(id:) do |fruit|
     fruit.id = id
     fruit.name = name
     fruit.position = position
