@@ -1,0 +1,24 @@
+name: ci
+
+on: [ push ]
+
+env:
+  server-directory: ./server/
+
+jobs:
+  server-ci:
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ${{ env.server-directory }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          working-directory: ${{ env.server-directory }}
+      - name: Security audit application code
+        run: bundle exec brakeman -q -w2 --no-pager
+      - name: Lint Ruby files
+        run: bundle exec rubocop --format simple --parallel

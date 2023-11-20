@@ -1,0 +1,9 @@
+# .rubocop.yml
+
+AllCops:
+  Exclude:
+    - './bin/**/*'
+    - './vendor/**/*'
+
+Style/Documentation:
+  Enabled: false
