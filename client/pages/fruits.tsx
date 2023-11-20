@@ -114,7 +114,7 @@ export default function FruitsPage (): React.JSX.Element {
             <td>
               <Button onClick={() => {
                 createMutation.mutate()
-              }} disabled={createButtonDisabled || isWaiting}>Add</Button>
+              }} disabled={createButtonDisabled || isWaiting} role='button'>Add</Button>
             </td>
           </tr>
         </tbody>
