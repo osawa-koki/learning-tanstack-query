@@ -22,3 +22,5 @@ jobs:
         run: bundle exec brakeman -q -w2 --no-pager
       - name: Lint Ruby files
         run: bundle exec rubocop --format simple --parallel
+      - name: Test application
+        run: bundle exec rails test
