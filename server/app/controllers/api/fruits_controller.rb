@@ -40,5 +40,9 @@ module Api
     def set_fruit
       @fruit = Fruit.find(params[:id])
     end
+
+    def fruit_params
+      params.require(:fruit).permit(:name, :comment, :position)
+    end
   end
 end
