@@ -176,6 +176,9 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
+    rubocop-performance (1.19.1)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.13.0)
     sqlite3 (1.6.8-arm64-darwin)
     stringio (3.0.9)
@@ -200,6 +203,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.8)
   rubocop
+  rubocop-performance
   sqlite3 (~> 1.4)
   tzinfo-data
 
