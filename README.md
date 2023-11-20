@@ -2,6 +2,8 @@
 
 🧮🧮🧮 `TanStack Query`を学習する！  
 
+![成果物](./docs/images/fruit.gif)  
+
 ## 実行方法
 
 ```shell
