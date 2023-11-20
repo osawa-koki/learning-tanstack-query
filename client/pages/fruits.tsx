@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-query'
 import React, { useMemo, useState } from 'react'
 import { Alert, Button, Form, Spinner, Table } from 'react-bootstrap'
+import { BsFillTrash3Fill } from 'react-icons/bs'
 import setting from '../setting'
 
 export default function FruitsPage (): React.JSX.Element {
@@ -54,6 +55,20 @@ export default function FruitsPage (): React.JSX.Element {
     }
   })
 
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      await fetch(`${setting.apiPath}/api/fruits/${id}`, {
+        method: 'DELETE'
+      })
+    },
+    onSettled: async () => {
+      const filters: InvalidateQueryFilters = {
+        queryKey: ['fruits']
+      }
+      await queryClient.invalidateQueries(filters)
+    }
+  })
+
   if (isLoading || fruits == null) {
     return <Spinner animation="border" />
   }
@@ -80,7 +95,12 @@ export default function FruitsPage (): React.JSX.Element {
               <td>{fruit.id}</td>
               <td>{fruit.name}</td>
               <td>{fruit.comment}</td>
-              <td></td>
+              <td>
+                <BsFillTrash3Fill onClick={() => {
+                  if (!window.confirm(`Delete ${fruit.name}?`)) return
+                  deleteMutation.mutate(fruit.id)
+                }} className='text-danger' role='button' />
+              </td>
             </tr>
           ))}
           <tr>
@@ -94,7 +114,7 @@ export default function FruitsPage (): React.JSX.Element {
             <td>
               <Button onClick={() => {
                 createMutation.mutate()
-              }} disabled={createButtonDisabled || isWaiting}>Add</Button>
+              }} disabled={createButtonDisabled || isWaiting} role='button'>Add</Button>
             </td>
           </tr>
         </tbody>
