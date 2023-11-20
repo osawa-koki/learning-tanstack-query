@@ -4,6 +4,7 @@ on: [ push ]
 
 env:
   server-directory: ./server/
+  client-directory: ./client/
 
 jobs:
   server-ci:
@@ -24,6 +25,9 @@ jobs:
         run: bundle exec rubocop --format simple --parallel
   client-ci:
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ${{ env.client-directory }}
     strategy:
       matrix:
         node-version: [18.x, 20.x]
